@@ -1,0 +1,20 @@
+version: "3.6"
+services:
+    rabbitmq:
+        container_name: rabbitmq
+        ports:
+            - 5672:5672
+            - 15672:15672
+        image: rabbitmq:3-management
+                
+    microservicea:
+        container_name: microservicea  
+        image: bdeklerk/microservicea
+        depends_on:
+            - rabbitmq
+        
+    microserviceb:
+        container_name: microserviceb  
+        image: bdeklerk/microserviceb
+        depends_on:
+            - rabbitmq      
